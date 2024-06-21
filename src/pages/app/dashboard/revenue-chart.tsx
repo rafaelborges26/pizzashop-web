@@ -1,3 +1,8 @@
+import { useQuery } from '@tanstack/react-query'
+import { subDays } from 'date-fns'
+import { Loader2 } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import { DateRange } from 'react-day-picker'
 import {
   CartesianGrid,
   Line,
@@ -8,6 +13,8 @@ import {
 } from 'recharts'
 import colors from 'tailwindcss/colors'
 
+import { getDailyRevenueInPeriod } from '@/api/get-daily-revenue-in-period'
+import { DateRangePicker } from '@/components/date-range-picker'
 import {
   Card,
   CardContent,
@@ -15,18 +22,31 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-
-const data = [
-  { date: '10/12', revenue: 1200 },
-  { date: '11/12', revenue: 500 },
-  { date: '12/12', revenue: 300 },
-  { date: '13/12', revenue: 1500 },
-  { date: '14/12', revenue: 5000 },
-  { date: '15/12', revenue: 1800 },
-  { date: '16/12', revenue: 2200 },
-]
+import { Label } from '@/components/ui/label'
 
 export function RevenueChart() {
+  const [dateRange, setDateRange] = useState<DateRange | undefined>({
+    from: subDays(new Date(), 7),
+    to: new Date(),
+  })
+  const { data: dailyRevenueInPeriod } = useQuery({
+    queryKey: ['metrics', 'revenue-in-period', dateRange],
+    queryFn: () =>
+      getDailyRevenueInPeriod({
+        from: dateRange?.from,
+        to: dateRange?.to,
+      }),
+  })
+
+  const chartDate = useMemo(() => {
+    return dailyRevenueInPeriod?.map((chartItem) => {
+      return {
+        date: chartItem.date,
+        receipt: chartItem.receipt / 100,
+      }
+    })
+  }, [dailyRevenueInPeriod])
+
   return (
     <Card className="col-span-6">
       <CardHeader className="flex-row items-center justify-between pb-8">
@@ -36,38 +56,49 @@ export function RevenueChart() {
           </CardTitle>
           <CardDescription>Receita diária no período</CardDescription>
         </div>
+
+        <div className="flex items-center gap-3">
+          <Label>Período</Label>
+          <DateRangePicker date={dateRange} onDateChange={setDateRange} />
+        </div>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width={'100%'} height={240}>
-          <LineChart data={data} style={{ fontSize: 12 }}>
-            <XAxis dataKey="date" tickLine={false} axisLine={false} dy={16} />
+        {chartDate ? (
+          <ResponsiveContainer width={'100%'} height={240}>
+            <LineChart data={chartDate} style={{ fontSize: 12 }}>
+              <XAxis dataKey="date" tickLine={false} axisLine={false} dy={16} />
 
-            <YAxis
-              stroke="#888"
-              axisLine={false}
-              tickLine={false}
-              width={88}
-              tickFormatter={(value: number) =>
-                value.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                })
-              }
-            />
-            <Line
-              type={'linear'}
-              strokeWidth={2}
-              dataKey={'revenue'}
-              stroke={
-                colors.violet['500']
-              } /* Consumir as váriaveis das cores do tailwindcss */
-            />
-            <CartesianGrid
-              vertical={false}
-              className="stroke-muted"
-            ></CartesianGrid>
-          </LineChart>
-        </ResponsiveContainer>
+              <YAxis
+                stroke="#888"
+                axisLine={false}
+                tickLine={false}
+                width={88}
+                tickFormatter={(value: number) =>
+                  value.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })
+                }
+              />
+              <Line
+                type={'linear'}
+                strokeWidth={2}
+                dataKey={'receipt'}
+                stroke={
+                  colors.violet['500']
+                } /* Consumir as váriaveis das cores do tailwindcss */
+              />
+              <CartesianGrid
+                vertical={false}
+                className="stroke-muted"
+              ></CartesianGrid>
+            </LineChart>
+          </ResponsiveContainer>
+        ) : (
+          <div className="flex h-[248px] w-full items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+          </div>
+        )}
       </CardContent>
     </Card>
   )
