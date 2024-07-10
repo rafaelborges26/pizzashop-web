@@ -6,29 +6,25 @@
 <p align="center">O projeto foi desenvolvido com base nas aulas do curso do Ignite utilizando as tecnologias mais modernas.</p>
 
 <h1 align="center">
-    <a href="https://quiz.rafaelborges.dev.br/">🔗 Quiz</a>
+    <a href="https://quiz.rafaelborges.dev.br/">🔗 PizzaShop</a>
 </h1>
 <p align="center">🚀 Aplicação web PizzaShop</p>
 
-<strong>Selecionar quantidade de questões</strong>
-<img src="public/github/selectQuantity.PNG" alt="Selecionar quantidade de questões" />
+<strong>Dashboard</strong>
+<img src="public/github/dashboard.png" alt="Página com calendários e cards informativos" />
 
-<strong>Perguntas</strong>
-<img src="public/github/questions.PNG" alt="Primeira Questão" />
+<strong>Pedidos</strong>
+<img src="public/github/orders.png" alt="Página com a tabela de pedidos" />
 
-<strong>Perguntas concluídas</strong>
-<img src="public/github/questionsDone.PNG" alt="Questões feitas" />
+<strong>Detalhes do pedido</strong>
+<img src="public/github/order-description.png" alt="Detalhes do pedido selecionado" />
 
-<strong>Pergunta selecionada</strong>
-<img src="public/github/questionAnswered.PNG" alt="Pergunta selecionada" />
+<strong>Dashboard versão Light</strong>
+<img src="public/github/dashboard-light.png" alt="dashboard com a página clara" />
 
-<strong>Resultado</strong>
+<strong>Testes e2e utilizando a ferramenta Playwright</strong>
 <br/>
-<img src="public/github/result.PNG" alt="Resultado" />
-
-<strong>Tela responsiva</strong>
-<br/>
-<img src="public/github/responsive.PNG" alt="Tela responsiva" />
+<img src="public/github/tests.png" alt="Resultado dos testes e2e" />
 
 ### 🛠 Utilizar
 
@@ -46,7 +42,9 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - [React](https://pt-br.reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Chakra UI](https://chakra-ui.com/)
+- [Shadcn UI](https://ui.shadcn.com/docs)
+- [Playwright](https://playwright.dev/docs/intro)
+
 
 
  <img style="border-radius: 50%;" src="https://github.com/rafaelborges26.png" width="100px;" alt="Rafael Borges"/>
