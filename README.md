@@ -5,9 +5,6 @@
 <p align="center">Além disso, o dashboard permite o acompanhamento detalhado de cada pedido, com informações sobre itens vendidos, a possibilidade de alterar o status dos pedidos e a opção de cancelamento.</p>
 <p align="center">O projeto foi desenvolvido com base nas aulas do curso do Ignite utilizando as tecnologias mais modernas.</p>
 
-<h1 align="center">
-    <a href="https://quiz.rafaelborges.dev.br/">🔗 PizzaShop</a>
-</h1>
 <p align="center">🚀 Aplicação web PizzaShop</p>
 
 <strong>Dashboard</strong>
@@ -47,7 +44,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 
 
- <img style="border-radius: 50%;" src="https://github.com/rafaelborges26.png" width="100px;" alt="Rafael Borges"/>
+ <img style="border-radius: 50%; margin-top: 12px;" src="https://github.com/rafaelborges26.png" width="100px;" alt="Rafael Borges"/>
  <br />
  <sub><b>Rafael</b></sub></a>
 
