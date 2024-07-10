@@ -11,7 +11,7 @@ test('sign in success', async ({ page }) => {
     'Enviamos um link de autenticação para o seu e-mail',
   ) // buscar
 
-  expect(toast).toBeVisible() // esteja na tela
+  await expect(toast).toBeVisible() // esteja na tela
 })
 
 test('sign in with srong credentials', async ({ page }) => {
@@ -23,7 +23,7 @@ test('sign in with srong credentials', async ({ page }) => {
 
   const toast = page.getByText('Credenciais inválidas') // buscar
 
-  expect(toast).toBeVisible() // esteja na tela
+  await expect(toast).toBeVisible() // esteja na tela
 })
 
 test('navigate to new restaurant page', async ({ page }) => {

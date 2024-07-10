@@ -47,7 +47,7 @@ export function Orders() {
       return state
     })
   }
-
+  console.log(result, 'result')
   return (
     <>
       <Helmet title="Pedidos" />
